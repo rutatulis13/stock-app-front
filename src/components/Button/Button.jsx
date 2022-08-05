@@ -6,8 +6,10 @@ const Button = ({
   enteredText,
   setConstantCompanyData,
   setShowErrorMessage,
+  setEnteredText,
 }) => {
   const submitHandler = () => {
+    setShowErrorMessage(false)
     axios
       .get(
         `https://finnhub.io/api/v1/stock/profile2?symbol=${enteredText}&token=cbjoooaad3iarlnd68lg`,
@@ -19,6 +21,7 @@ const Button = ({
         setConstantCompanyData(res.data)
         console.log(res.data)
       })
+    // setEnteredText('')
   }
   return (
     <button className="button" type="button" onClick={submitHandler}>

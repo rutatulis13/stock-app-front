@@ -1,0 +1,23 @@
+.chart {
+  width: 60%;
+  &__select-prices {
+    border-radius: 5px;
+    border: none;
+    width: auto;
+    height: 25px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 900px) {
+  .chart {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .chart {
+    width: 90%;
+    margin: 10px;
+  }
+}

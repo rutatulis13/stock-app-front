@@ -1,7 +1,7 @@
 .data-range__control {
   &--label {
     font-size: 14px;
-    color: #25ced1;
+    color: #ea526f;
     margin: 10px 10px 10px 0;
   }
   input {
@@ -10,5 +10,11 @@
     width: auto;
     height: 25px;
     margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .data-range__control {
+    line-height: 35px;
   }
 }

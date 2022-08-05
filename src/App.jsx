@@ -1,5 +1,5 @@
 import React from 'react'
-import CompanyInfo from './components/CompanyInfo'
+import CompanyInfo from './components/CompanyInfo/CompanyInfo'
 import './App.scss'
 
 function App() {

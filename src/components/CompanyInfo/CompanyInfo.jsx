@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import DateRange from './DateRange'
-import Chart from './Chart'
-import Button from './Button'
-import { UserData } from '../constants/Data'
+import DateRange from '../DateRange/DateRange'
+import Chart from '../Chart/Chart'
+import Button from '../Button/Button'
+import { UserData } from '../../constants/Data'
 import './CompanyInfo.scss'
 
 const CompanyInfo = () => {
@@ -13,8 +13,6 @@ const CompanyInfo = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false)
   const [startDateRange, setStartDateRange] = useState('')
   const [endDateRange, setEndDateRange] = useState('')
-  const [showSelect, setShowSelect] = useState(false)
-  const [selectedPriceValue, setSelectedPriceValue] = useState('h')
   const [generatedChart, setGeneratedChart] = useState({
     labels: UserData.map((item) => item.year),
     datasets: [
@@ -35,34 +33,58 @@ const CompanyInfo = () => {
   }
 
   const getInfo = () => {
+    console.log(startDateRange)
     const start = Math.floor(new Date(startDateRange).getTime() / 1000)
     const end = Math.floor(new Date(endDateRange).getTime() / 1000)
+    console.log(start)
+    console.log(start)
     axios
       .get(
         `https://finnhub.io/api/v1/stock/candle?symbol=${enteredText}&resolution=D&from=${start}&to=${end}&token=cbjoooaad3iarlnd68lg`,
       )
       .then((res) => {
-        console.log(res.data)
         setStockPriceHistory(res.data)
-        console.log(res.data)
         sendDataToServer(res.data)
-        setShowSelect(true)
-        console.log(selectedPriceValue)
+        console.log(res.data)
         setGeneratedChart({
           labels: res.data.t.map((item) =>
             new Date(item * 1000).toLocaleDateString('en-US'),
           ),
           datasets: [
             {
-              label: 'price',
-              data: res.data[selectedPriceValue].map((item) => item),
-              backgroundColor: ['#25ced1', '#fceade', '#ff8a5b', '#ea526f'],
-              borderColor: 'white',
+              label: 'High Price',
+              data: res.data.h.map((item) => item),
+              backgroundColor: '#25ced1',
+              borderColor: '#25ced1',
               borderWidth: 2,
+              yAxisID: 'y',
+            },
+            {
+              label: 'Low Price',
+              data: res.data.l.map((item) => item),
+              backgroundColor: '#fceade',
+              borderColor: '#fceade',
+              borderWidth: 2,
+              yAxisID: 'y',
+            },
+            {
+              label: 'Open Price',
+              data: res.data.o.map((item) => item),
+              backgroundColor: '#ff8a5b',
+              borderColor: '#ff8a5b',
+              borderWidth: 2,
+              yAxisID: 'y',
+            },
+            {
+              label: 'Close Price',
+              data: res.data.c.map((item) => item),
+              backgroundColor: '#ea526f',
+              borderColor: '#ea526f',
+              borderWidth: 2,
+              yAxisID: 'y',
             },
           ],
-        },
-        )
+        })
       })
   }
 
@@ -101,11 +123,13 @@ const CompanyInfo = () => {
                 placeholder="AAPL e.g."
                 value={enteredText}
                 onChange={symbolChangeHandler}
+                required
               />
               <Button
                 enteredText={enteredText}
                 setConstantCompanyData={setConstantCompanyData}
                 setShowErrorMessage={setShowErrorMessage}
+                setEnteredText={setEnteredText}
               />
             </div>
           </div>
@@ -140,12 +164,7 @@ const CompanyInfo = () => {
           </div>
         ) : null}
       </div>
-      <Chart
-        chartData={generatedChart}
-        showSelect={showSelect}
-        selectedPriceValue={selectedPriceValue}
-        setSelectedPriceValue={setSelectedPriceValue}
-      />
+      <Chart chartData={generatedChart} />
     </div>
   )
 }
