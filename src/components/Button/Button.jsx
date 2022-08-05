@@ -7,6 +7,7 @@ const Button = ({
   setConstantCompanyData,
   setShowErrorMessage,
   setEnteredText,
+  setCompanySymbol,
 }) => {
   const submitHandler = () => {
     setShowErrorMessage(false)
@@ -21,7 +22,8 @@ const Button = ({
         setConstantCompanyData(res.data)
         console.log(res.data)
       })
-    // setEnteredText('')
+    setCompanySymbol(enteredText)
+    setEnteredText('')
   }
   return (
     <button className="button" type="button" onClick={submitHandler}>

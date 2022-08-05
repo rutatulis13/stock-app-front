@@ -13,6 +13,7 @@ const CompanyInfo = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false)
   const [startDateRange, setStartDateRange] = useState('')
   const [endDateRange, setEndDateRange] = useState('')
+  const [companySymbol, setCompanySymbol] = useState('')
   const [generatedChart, setGeneratedChart] = useState({
     labels: UserData.map((item) => item.year),
     datasets: [
@@ -33,14 +34,11 @@ const CompanyInfo = () => {
   }
 
   const getInfo = () => {
-    console.log(startDateRange)
     const start = Math.floor(new Date(startDateRange).getTime() / 1000)
     const end = Math.floor(new Date(endDateRange).getTime() / 1000)
-    console.log(start)
-    console.log(start)
     axios
       .get(
-        `https://finnhub.io/api/v1/stock/candle?symbol=${enteredText}&resolution=D&from=${start}&to=${end}&token=cbjoooaad3iarlnd68lg`,
+        `https://finnhub.io/api/v1/stock/candle?symbol=${companySymbol}&resolution=D&from=${start}&to=${end}&token=cbjoooaad3iarlnd68lg`,
       )
       .then((res) => {
         setStockPriceHistory(res.data)
@@ -126,6 +124,7 @@ const CompanyInfo = () => {
                 required
               />
               <Button
+                setCompanySymbol={setCompanySymbol}
                 enteredText={enteredText}
                 setConstantCompanyData={setConstantCompanyData}
                 setShowErrorMessage={setShowErrorMessage}

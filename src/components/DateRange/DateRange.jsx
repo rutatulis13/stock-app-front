@@ -26,7 +26,6 @@ const DateRange = ({
     today = yyyy + '-' + mm + '-' + dd
     setTodayValue(today)
     setMinValue(yyyyBefore + '-' + mm + '-' + dd)
-    console.log(today)
   }, [])
 
   const startDateChangeHandler = (event) => {
