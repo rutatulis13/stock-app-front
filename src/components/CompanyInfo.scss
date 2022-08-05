@@ -1,0 +1,53 @@
+.company-data {
+  display: flex;
+  flex-direction: row;
+  &__search {
+    form {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+    }
+    &--name {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    &--error {
+      font-size: 12px;
+      padding: 6px;
+      color: #ea526f;
+      margin-top: 25px;
+      position: absolute;
+    }
+    &--input {
+      position: relative;
+      margin-top: 40px;
+      border-radius: 5px;
+      border: none;
+      width: auto;
+      height: 25px;
+      margin-right: 5px;
+    }
+  }
+  &__list {
+    ul {
+      list-style: none;
+    }
+    li {
+      line-height: 30px;
+    }
+    &--name {
+      font-size: 30px;
+      color: #25ced1;
+      cursor: pointer;
+    }
+    &--name:hover {
+      font-size: 30px;
+      color: #fceade;
+    }
+    &--url {
+      color: #25ced1;
+      text-decoration: none;
+    }
+  }
+}
