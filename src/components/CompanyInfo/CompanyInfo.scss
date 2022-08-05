@@ -30,6 +30,7 @@
     }
   }
   &__list {
+    animation: 1s ease-in 0s 1 apper;
     ul {
       list-style: none;
       margin: 0 10px 0 -30px;
@@ -49,6 +50,14 @@
       color: #25ced1;
       text-decoration: none;
     }
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
