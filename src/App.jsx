@@ -5,7 +5,7 @@ import './App.scss'
 function App() {
   return (
     <div className="layout">
-      <h1>Stock App</h1>
+      <h1>Stock Trading App</h1>
       <CompanyInfo />
     </div>
   )
